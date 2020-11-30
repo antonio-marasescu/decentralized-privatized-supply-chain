@@ -1,25 +1,25 @@
-import { Contract } from '../schemas/contract.schema';
+import { ContractDocument } from '../schemas/contract.schema';
 
 export class ContractDto {
   id: string;
   name: string;
-  owner: number;
+  ownerId: string;
   version: number;
-  programArtifactHash: string;
-  programCodeHash: string;
-  programSolidityContractHash: string;
+  programArtifactFileId: string;
+  programCodeFileId: string;
+  programSolidityContractFileId: string;
 
   constructor(values: Partial<ContractDto>) {
     this.id = values.id;
     this.name = values.name;
-    this.owner = values.owner;
+    this.ownerId = values.ownerId;
     this.version = values.version;
-    this.programArtifactHash = values.programArtifactHash;
-    this.programCodeHash = values.programCodeHash;
-    this.programSolidityContractHash = values.programSolidityContractHash;
+    this.programArtifactFileId = values.programArtifactFileId;
+    this.programCodeFileId = values.programCodeFileId;
+    this.programSolidityContractFileId = values.programSolidityContractFileId;
   }
 
-  static from(model: Contract): ContractDto {
+  static from(model: ContractDocument): ContractDto {
     return new ContractDto(model);
   }
 }

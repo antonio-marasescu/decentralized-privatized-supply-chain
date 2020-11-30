@@ -3,6 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Contract, ContractDocument } from '../schemas/contract.schema';
 import { Model } from 'mongoose';
 import { ContractDto } from '../dto/contract.dto';
+import { SaveContractDto } from '../dto/save-contract.dto';
+import { defaultTo } from 'lodash';
 
 @Injectable()
 export class ContractsService {
@@ -15,17 +17,35 @@ export class ContractsService {
     return models.map((m) => ContractDto.from(m));
   }
 
-  async getAllContractsOfUser(userId: number): Promise<ContractDto[]> {
-    const models = await this.contractModel.find({ owner: userId });
+  async getAllContractsOfUser(userId: string): Promise<ContractDto[]> {
+    const models = await this.contractModel.find({ ownerId: userId });
     return models.map((m) => ContractDto.from(m));
   }
 
-  async createContract(dto: ContractDto): Promise<ContractDto> {
-    const newContract = new this.contractModel({
-      name: dto.name,
-      owner: dto.owner,
-      version: dto.version,
-    });
+  async saveContract(
+    dto: SaveContractDto,
+    ownerId: string,
+  ): Promise<ContractDto> {
+    const existingModel = await this.contractModel.findById(dto.id);
+    const newModel = {
+      id: defaultTo(dto?.id, null),
+      name: defaultTo(dto.name || existingModel?.name, null),
+      ownerId: defaultTo(ownerId || existingModel?.ownerId, null),
+      version: existingModel?.version ? existingModel.version + 1 : 1.0,
+      programCodeFileId: defaultTo(
+        dto?.programCodeFileId || existingModel?.programCodeFileId,
+        null,
+      ),
+      programArtifactFileId: defaultTo(
+        existingModel?.programArtifactFileId,
+        null,
+      ),
+      programSolidityContractFileId: defaultTo(
+        existingModel?.programSolidityContractFileId,
+        null,
+      ),
+    };
+    const newContract = new this.contractModel(newModel);
     const savedContract = await newContract.save();
     return ContractDto.from(savedContract);
   }

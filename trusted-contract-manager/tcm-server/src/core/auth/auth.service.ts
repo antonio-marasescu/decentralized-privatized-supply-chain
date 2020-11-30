@@ -49,6 +49,8 @@ export class AuthService {
     return {
       expiresIn: this.jwtExpirationPeriod,
       token: jwt,
+      email: user.email,
+      id: user.id,
     };
   }
 }

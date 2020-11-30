@@ -11,7 +11,7 @@ export class Contract {
   name: string;
 
   @Prop()
-  owner: number;
+  ownerId: string;
 
   @Prop()
   version: number;
