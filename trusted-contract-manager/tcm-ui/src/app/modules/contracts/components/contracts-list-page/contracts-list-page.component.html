@@ -1,0 +1,20 @@
+<div>
+  <div class="right-aligned-container">
+    <button
+      mat-raised-button
+      class="right-aligned-container-data"
+      color="primary"
+      (click)="onCreate()"
+    >
+      Create Contract
+    </button>
+  </div>
+  <app-contracts-list
+    [dataSource]="dataSource"
+    (dataSelected)="onElementSelected($event)"
+  ></app-contracts-list>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

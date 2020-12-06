@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MulterModule } from '@nestjs/platform-express';
-import { GridFsMulterServiceConfig } from './config/grid-fs-multer-service.config';
-import { FilesService } from './services/files.service';
-import { FilesController } from './controllers/files.controller';
+import { GridFsMulterServiceConfig } from './grid-fs-multer-service.config';
+import { FilesService } from './files.service';
+import { FilesController } from './files.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         new GridFsMulterServiceConfig(configService).createMulterOptions(),
       inject: [ConfigService],
     }),
+    PassportModule.register({ defaultStrategy: 'jwt', session: false }),
   ],
   providers: [FilesService],
   controllers: [FilesController],

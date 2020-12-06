@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ContractsModule } from './contracts/contracts.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -16,6 +14,7 @@ import { FilesModule } from './core/files/files.module';
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGODB_URI'),
         useCreateIndex: true,
+        useUnifiedTopology: true,
       }),
       inject: [ConfigService],
     }),
@@ -24,7 +23,7 @@ import { FilesModule } from './core/files/files.module';
     AuthModule,
     FilesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

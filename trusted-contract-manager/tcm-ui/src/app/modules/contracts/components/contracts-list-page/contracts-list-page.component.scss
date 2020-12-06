@@ -1,0 +1,10 @@
+.right-aligned-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.right-aligned-container-data {
+  margin: 24px;
+}

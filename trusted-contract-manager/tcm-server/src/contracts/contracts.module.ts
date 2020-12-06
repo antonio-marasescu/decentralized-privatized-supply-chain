@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CONTRACTS_SCHEMAS } from './schemas/all-schemas';
 import { ContractsService } from './services/contracts.service';
 import { ContractsController } from './controllers/contracts.controller';
 import { PassportModule } from '@nestjs/passport';
+import { Contract, ContractSchema } from './schemas/contract.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature(CONTRACTS_SCHEMAS),
+    MongooseModule.forFeature([
+      { name: Contract.name, schema: ContractSchema },
+    ]),
     PassportModule.register({ defaultStrategy: 'jwt', session: false }),
   ],
   controllers: [ContractsController],

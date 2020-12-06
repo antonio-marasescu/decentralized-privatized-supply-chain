@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button aria-label="Contract Manager Article Icon">
+    <mat-icon>article</mat-icon>
+  </button>
+  <span>Trusted Contract Manager</span>
+  <span class="content-spacer"></span>
+  <div *ngIf="isLoggedIn">
+    <button mat-button>
+      <span *ngIf="currentUser">{{ currentUser.username }}</span>
+      <mat-icon class="account-icon">group</mat-icon>
+    </button>
+    <button mat-flat-button color="none" (click)="logout()">Logout</button>
+  </div>
+</mat-toolbar>

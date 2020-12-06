@@ -1,5 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import {
+  ContractProgramStatusEnum,
+  ContractProgramStatusEnumValues,
+} from './contract-program-status.enum';
 
 export type ContractDocument = Contract & Document;
 
@@ -7,16 +11,16 @@ export type ContractDocument = Contract & Document;
 export class Contract {
   id: string;
 
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
-  @Prop()
+  @Prop({ required: true })
   ownerId: string;
 
-  @Prop()
+  @Prop({ required: true })
   version: number;
 
-  @Prop()
+  @Prop({ required: true })
   programArtifactFileId: string;
 
   @Prop()
@@ -24,6 +28,9 @@ export class Contract {
 
   @Prop()
   programSolidityContractFileId: string;
+
+  @Prop({ default: null, enum: ContractProgramStatusEnumValues })
+  programCompilationStatus?: ContractProgramStatusEnum;
 }
 
 export const ContractSchema = SchemaFactory.createForClass(Contract);

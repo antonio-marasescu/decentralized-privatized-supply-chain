@@ -7,12 +7,15 @@ import {
   Post,
   Res,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { FilesService } from '../services/files.service';
+import { FilesService } from './files.service';
+import { AuthGuard } from '@nestjs/passport';
 
-@Controller('/attachment/files')
+@Controller('api/attachment/files')
+@UseGuards(AuthGuard())
 export class FilesController {
   constructor(private filesService: FilesService) {}
 

@@ -6,7 +6,7 @@ import { CurrentUser } from '../../core/shared/decorators/current-user.decorator
 import { JwtResponseDto } from '../../core/auth/dto/jwt-response.dto';
 import { SaveContractDto } from '../dto/save-contract.dto';
 
-@Controller('contracts')
+@Controller('api/contracts')
 @UseGuards(AuthGuard())
 export class ContractsController {
   constructor(private readonly contractsService: ContractsService) {}

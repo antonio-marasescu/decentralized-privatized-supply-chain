@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { ContractDto } from '../dto/contract.dto';
 import { SaveContractDto } from '../dto/save-contract.dto';
 import { defaultTo } from 'lodash';
+import { ContractProgramStatusEnum } from '../schemas/contract-program-status.enum';
 
 @Injectable()
 export class ContractsService {
@@ -27,7 +28,7 @@ export class ContractsService {
     ownerId: string,
   ): Promise<ContractDto> {
     const existingModel = await this.contractModel.findById(dto.id);
-    const newModel = {
+    const newModel: Contract = {
       id: defaultTo(dto?.id, null),
       name: defaultTo(dto.name || existingModel?.name, null),
       ownerId: defaultTo(ownerId || existingModel?.ownerId, null),
@@ -44,6 +45,7 @@ export class ContractsService {
         existingModel?.programSolidityContractFileId,
         null,
       ),
+      programCompilationStatus: ContractProgramStatusEnum.COMPILING,
     };
     const newContract = new this.contractModel(newModel);
     const savedContract = await newContract.save();

@@ -1,0 +1,31 @@
+.card-container {
+  width: 50%;
+}
+
+.card-container-title {
+  width: 100% !important;
+  text-align: center;
+}
+
+.centered-content {
+  padding-top: 24px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-control-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.footer-control-button {
+  display: block;
+  width: 400px;
+  margin-top: 8px;
+  padding-top: 6px;
+}

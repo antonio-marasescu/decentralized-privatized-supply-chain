@@ -1,4 +1,5 @@
 import { ContractDocument } from '../schemas/contract.schema';
+import { ContractProgramStatusEnum } from '../schemas/contract-program-status.enum';
 
 export class ContractDto {
   id: string;
@@ -8,6 +9,7 @@ export class ContractDto {
   programArtifactFileId: string;
   programCodeFileId: string;
   programSolidityContractFileId: string;
+  programCompilationStatus: ContractProgramStatusEnum;
 
   constructor(values: Partial<ContractDto>) {
     this.id = values.id;
@@ -17,6 +19,7 @@ export class ContractDto {
     this.programArtifactFileId = values.programArtifactFileId;
     this.programCodeFileId = values.programCodeFileId;
     this.programSolidityContractFileId = values.programSolidityContractFileId;
+    this.programCompilationStatus = values.programCompilationStatus;
   }
 
   static from(model: ContractDocument): ContractDto {

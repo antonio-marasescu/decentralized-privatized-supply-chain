@@ -1,0 +1,16 @@
+.form-container {
+  width: 100%;
+  display: block;
+}
+
+.form-control-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-control-input {
+  padding-top: 8px;
+  margin-top: 8px;
+  width: 50%;
+}

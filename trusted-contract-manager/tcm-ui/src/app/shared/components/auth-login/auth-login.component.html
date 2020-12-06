@@ -1,0 +1,36 @@
+<div class="centered-content">
+  <mat-card [class.mat-elevation-z1]="true" class="card-container">
+    <mat-card-header>
+      <div class="card-container-title"><h1>Login Page</h1></div>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <app-auth-login-form [loginForm]="loginForm"></app-auth-login-form>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="footer-control-container">
+        <div>
+          <button
+            mat-stroked-button
+            color="primary"
+            class="footer-control-button"
+            (click)="login()"
+            [disabled]="!loginForm.valid"
+          >
+            Login
+          </button>
+          <button
+            mat-stroked-button
+            color="primary"
+            class="footer-control-button"
+            (click)="gotoRegister()"
+          >
+            You don't have an Account?
+          </button>
+        </div>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>
